@@ -8,6 +8,9 @@ export default function CalcBoard(props){
     }
     function enterButton(){
         //replace props.input with a parameter 'equation' and pass props.input as a parameter.
+        // then add a function to look at the input (with parantesis included, split function into each basic equation
+        //(5*4)+((2-4)*(12/3)) should call this function once for the first value, 3 times for the second value (original 2, plus 
+        //evaluation of those 2, and finally another time to evaluate both)
         let firstVal 
         let secondVal
         let result
@@ -20,9 +23,31 @@ export default function CalcBoard(props){
                 let pInd = props.input.indexOf("+")
                 firstVal = props.input.substring(0,pInd)
                 secondVal = props.input.substring(pInd+1,props.input.length)
-                console.log(firstVal + " " + secondVal)
                 result = parseFloat(firstVal)+parseFloat(secondVal) 
                 props.setInput(result)
+                setResultGot(true)
+            }else if(props.input.indexOf("-") != -1 && props.input.indexOf("-") != 0){
+                let pInd = props.input.indexOf("-")
+                firstVal = props.input.substring(0,pInd)
+                secondVal = props.input.substring(pInd+1,props.input.length)
+                result = parseFloat(firstVal)-parseFloat(secondVal) 
+                props.setInput(result)
+                setResultGot(true)
+            }else if(props.input.indexOf("*") != -1){
+                let pInd = props.input.indexOf("*")
+                firstVal = props.input.substring(0,pInd)
+                secondVal = props.input.substring(pInd+1,props.input.length)
+                result = parseFloat(firstVal)*parseFloat(secondVal) 
+                props.setInput(result)
+                setResultGot(true)
+            }
+            else if(props.input.indexOf("/") != -1){
+                let pInd = props.input.indexOf("/")
+                firstVal = props.input.substring(0,pInd)
+                secondVal = props.input.substring(pInd+1,props.input.length)
+                result = parseFloat(firstVal)/parseFloat(secondVal) 
+                let fixResult = +result.toFixed(4);
+                props.setInput(fixResult)
                 setResultGot(true)
             }
         }
