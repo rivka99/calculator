@@ -1,0 +1,9 @@
+html{
+  margin: 0;
+}
+.calc-board{
+  width: 600;
+  height: 600;
+  border: 2px solid black; 
+ 
+}
