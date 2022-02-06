@@ -14,11 +14,13 @@ export default function CalcBoard(props){
         let firstVal 
         let secondVal
         let result
-        let badVals = "+/*"
+        let badVals = "+/*^"
         if(badVals.includes(props.input[0])){
             alert("invalid equation")
             props.setInput("")
         }else{
+            //first if here should be factorial, if factorial is at ind 0 and no 'badvals' and no - sign in middle
+            //.. then it's a simple factorial submission. 
             if(props.input.indexOf("+") != -1){
                 let pInd = props.input.indexOf("+")
                 firstVal = props.input.substring(0,pInd)
