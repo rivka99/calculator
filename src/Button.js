@@ -12,7 +12,7 @@ export default function Button(props){
     }
     return(
         <div>
-            <button onClick={updateVal}>{props.digit}</button>
+            <button onClick={updateVal} className="dig-btn">{props.digit}</button>
         </div>
     )
 }

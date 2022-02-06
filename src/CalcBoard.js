@@ -41,8 +41,8 @@ export default function CalcBoard(props){
                 props.setInput(result)
                 setResultGot(true)
             }
-            else if(props.input.indexOf("/") != -1){
-                let pInd = props.input.indexOf("/")
+            else if(props.input.indexOf("÷") != -1){
+                let pInd = props.input.indexOf("÷")
                 firstVal = props.input.substring(0,pInd)
                 secondVal = props.input.substring(pInd+1,props.input.length)
                 result = parseFloat(firstVal)/parseFloat(secondVal) 
@@ -59,8 +59,8 @@ export default function CalcBoard(props){
             {   
                 props.digits.map(button=><Button key = {button.id} digit = {button.digit} input={props.input} setInput={props.setInput} resultGot={resultGot} setResultGot={setResultGot}/>)
             }   
-             <button onClick={backButton}>⇚</button>
-             <button onClick={enterButton}>▶</button>
+             <button onClick={backButton} className="dig-btn">⌫</button>
+             <button onClick={enterButton} className="dig-btn">↩</button>
             </div>
            
         </div>
