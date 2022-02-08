@@ -6,6 +6,12 @@ export default function CalcBoard(props){
     function backButton(){
         props.setInput(props.input.substring(0,(props.input.length-1)))
     }
+    function fact(num){
+        if(num===0){
+            return 0
+        }
+        return num + fact(num-1)
+    }
     function enterButton(){
         //replace props.input with a parameter 'equation' and pass props.input as a parameter.
         // then add a function to look at the input (with parantesis included, split function into each basic equation
@@ -21,15 +27,27 @@ export default function CalcBoard(props){
         }else{
             //first if here should be factorial, if factorial is at ind 0 and no 'badvals' and no - sign in middle
             //.. then it's a simple factorial submission. 
-            if(props.input.indexOf("+") != -1){
+            if(props.input.indexOf("!") != -1){
+                let pInd = props.input.indexOf("!")
+                secondVal = props.input.substring(0,pInd)
+                result = fact(parseFloat(secondVal))
+                props.setInput(result)
+                setResultGot(true)
+            } else if(props.input.indexOf("+") != -1){
                 let pInd = props.input.indexOf("+")
                 firstVal = props.input.substring(0,pInd)
                 secondVal = props.input.substring(pInd+1,props.input.length)
                 result = parseFloat(firstVal)+parseFloat(secondVal) 
                 props.setInput(result)
                 setResultGot(true)
-            }else if(props.input.indexOf("-") != -1 && props.input.indexOf("-") != 0){
-                let pInd = props.input.indexOf("-")
+            }else if(props.input.indexOf("-") != -1 ){
+                let pInd
+                if(props.input.indexOf("-") === 0){
+                    pInd = props.input.indexOf("-",1)
+                }else{
+                    pInd = props.input.indexOf("-")
+                }
+                
                 firstVal = props.input.substring(0,pInd)
                 secondVal = props.input.substring(pInd+1,props.input.length)
                 result = parseFloat(firstVal)-parseFloat(secondVal) 
@@ -48,6 +66,14 @@ export default function CalcBoard(props){
                 firstVal = props.input.substring(0,pInd)
                 secondVal = props.input.substring(pInd+1,props.input.length)
                 result = parseFloat(firstVal)/parseFloat(secondVal) 
+                let fixResult = +result.toFixed(4);
+                props.setInput(fixResult)
+                setResultGot(true)
+            }else if(props.input.indexOf("^") != -1){
+                let pInd = props.input.indexOf("^")
+                firstVal = props.input.substring(0,pInd)
+                secondVal = props.input.substring(pInd+1,props.input.length)
+                result = Math.pow(parseFloat(firstVal),parseFloat(secondVal))
                 let fixResult = +result.toFixed(4);
                 props.setInput(fixResult)
                 setResultGot(true)
