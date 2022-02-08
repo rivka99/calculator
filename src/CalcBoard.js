@@ -27,7 +27,6 @@ export default function CalcBoard(props){
         }
     }
     function enterButton(equation){
-        //replace props.input with a parameter 'equation' and pass props.input as a parameter.
         // then add a function to look at the input (with parantesis included, split function into each basic equation
         //(5*4)+((2-4)*(12/3)) should call this function once for the first value, 3 times for the second value (original 2, plus 
         //evaluation of those 2, and finally another time to evaluate both)
@@ -40,30 +39,39 @@ export default function CalcBoard(props){
             props.setInput("")
         }else{
             if(equation.indexOf("!") != -1){
+                if(equation.includes("ᴀɴs")){
+                    equation =  equation.replace(/ᴀɴs/gi, String(props.prevResult))
+                    equation = equation.replace(/\s/g, '')
+                 }
                 let pInd = equation.indexOf("!")
                 secondVal = equation.substring(0,pInd)
                 result = fact(parseFloat(secondVal))
-                let fixResult = result.toExponential(4);
-                props.setInput(fixResult)
+                if(result > 1000000000){
+                    result = result.toExponential(4);
+                } 
+                props.setPrevResult(result)
+                props.setInput(result)
                 
                 setResultGot(true)
             } else if(equation.indexOf("+") != -1){
-                let pInd = equation.indexOf("+")
-               
-
                 if(equation.includes("ᴀɴs")){
                    equation =  equation.replace(/ᴀɴs/gi, String(props.prevResult))
                    equation = equation.replace(/\s/g, '')
                 }
+                let pInd = equation.indexOf("+")
                 equation = String(equation)
                 firstVal = equation.substring(0,pInd)
-                secondVal = equation.substring(pInd+1,equation.length)
+                secondVal = equation.substring(pInd+1)
                 result = parseFloat(firstVal)+parseFloat(secondVal) 
                 props.setInput(result)
                 props.setPrevResult(result)
                 setResultGot(true)
             }else if(equation.indexOf("-") != -1 ){
                 let pInd
+                if(equation.includes("ᴀɴs")){
+                    equation =  equation.replace(/ᴀɴs/gi, String(props.prevResult))
+                    equation = equation.replace(/\s/g, '')
+                 }
                 if(equation.indexOf("-") === 0){
                     pInd = equation.indexOf("-",1)
                 }else{
@@ -74,31 +82,48 @@ export default function CalcBoard(props){
                 secondVal = equation.substring(pInd+1,equation.length)
                 result = parseFloat(firstVal)-parseFloat(secondVal) 
                 props.setInput(result)
+                props.setPrevResult(result)
                 setResultGot(true)
             }else if(equation.indexOf("*") != -1){
+                if(equation.includes("ᴀɴs")){
+                    equation =  equation.replace(/ᴀɴs/gi, String(props.prevResult))
+                    equation = equation.replace(/\s/g, '')
+                 }
                 let pInd = equation.indexOf("*")
                 firstVal = equation.substring(0,pInd)
                 secondVal = equation.substring(pInd+1,equation.length)
                 result = parseFloat(firstVal)*parseFloat(secondVal) 
                 let fixResult = +result.toFixed(4);
                 props.setInput(fixResult)
+                props.setPrevResult(result)
                 setResultGot(true)
             }
             else if(equation.indexOf("÷") != -1){
+                if(equation.includes("ᴀɴs")){
+                    equation =  equation.replace(/ᴀɴs/gi, String(props.prevResult))
+                    equation = equation.replace(/\s/g, '')
+                 }
                 let pInd = equation.indexOf("÷")
                 firstVal = equation.substring(0,pInd)
                 secondVal = equation.substring(pInd+1,equation.length)
+               
                 result = parseFloat(firstVal)/parseFloat(secondVal) 
                 let fixResult = +result.toFixed(4);
                 props.setInput(fixResult)
+                props.setPrevResult(result)
                 setResultGot(true)
             }else if(equation.indexOf("^") != -1){
+                if(equation.includes("ᴀɴs")){
+                    equation =  equation.replace(/ᴀɴs/gi, String(props.prevResult))
+                    equation = equation.replace(/\s/g, '')
+                 }
                 let pInd = equation.indexOf("^")
                 firstVal = equation.substring(0,pInd)
                 secondVal = equation.substring(pInd+1,equation.length)
                 result = Math.pow(parseFloat(firstVal),parseFloat(secondVal))
                 let fixResult = +result.toFixed(4);
                 props.setInput(fixResult)
+                props.setPrevResult(result)
                 setResultGot(true)
             }
         }
