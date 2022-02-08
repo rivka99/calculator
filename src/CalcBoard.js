@@ -2,7 +2,7 @@ import { useState } from "react"
 import Button from "./Button"
 
 export default function CalcBoard(props){
-    const ans = false
+    let ans = false
     const [resultGot, setResultGot] = useState(false)
     function backButton(){
         props.setInput(String(props.input).substring(0,(props.input.length-1)))
@@ -19,7 +19,12 @@ export default function CalcBoard(props){
     }
     function ansButton(){
         ans = true
-        
+        if(resultGot === true){
+            props.setInput("ᴀɴs")
+            setResultGot(false)
+        }else{
+            props.setInput(props.input + "ᴀɴs")
+        }
     }
     function enterButton(equation){
         //replace props.input with a parameter 'equation' and pass props.input as a parameter.
@@ -37,17 +42,25 @@ export default function CalcBoard(props){
             if(equation.indexOf("!") != -1){
                 let pInd = equation.indexOf("!")
                 secondVal = equation.substring(0,pInd)
-                console.log(secondVal)
                 result = fact(parseFloat(secondVal))
                 let fixResult = result.toExponential(4);
                 props.setInput(fixResult)
+                
                 setResultGot(true)
             } else if(equation.indexOf("+") != -1){
                 let pInd = equation.indexOf("+")
+               
+
+                if(equation.includes("ᴀɴs")){
+                   equation =  equation.replace(/ᴀɴs/gi, String(props.prevResult))
+                   equation = equation.replace(/\s/g, '')
+                }
+                equation = String(equation)
                 firstVal = equation.substring(0,pInd)
                 secondVal = equation.substring(pInd+1,equation.length)
                 result = parseFloat(firstVal)+parseFloat(secondVal) 
                 props.setInput(result)
+                props.setPrevResult(result)
                 setResultGot(true)
             }else if(equation.indexOf("-") != -1 ){
                 let pInd
