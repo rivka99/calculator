@@ -10,10 +10,11 @@ function App() {
   {id:6,digit:'6'},{id:7, digit:'7'},{id:8,digit:'8'},{id:9,digit:'9'},{id:100, digit:'.'},{id:10, digit:'+'},
   {id:11, digit:'-'},{id:12, digit:'*'},{id:13, digit:'÷'},{id:14, digit:'^'},{id:15, digit:'!'}]
   const [input, setInput] = useState("")
+  const [prevResult, setPrevResult] = useState("")
   return (
   <div>
     <h2>React Calculator</h2>
-    <CalcBoard digits={digits} input={input} setInput={setInput}/>
+    <CalcBoard digits={digits} input={input} setInput={setInput} prevResult={prevResult} setPrevResult={setPrevResult}/>
     </div>
   );
 }

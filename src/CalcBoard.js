@@ -2,6 +2,7 @@ import { useState } from "react"
 import Button from "./Button"
 
 export default function CalcBoard(props){
+    const ans = false
     const [resultGot, setResultGot] = useState(false)
     function backButton(){
         props.setInput(String(props.input).substring(0,(props.input.length-1)))
@@ -12,8 +13,13 @@ export default function CalcBoard(props){
         }
         return num * fact(num-1)
     }
+
     function callEnter(){
         enterButton(props.input)
+    }
+    function ansButton(){
+        ans = true
+        
     }
     function enterButton(equation){
         //replace props.input with a parameter 'equation' and pass props.input as a parameter.
@@ -28,8 +34,6 @@ export default function CalcBoard(props){
             alert("invalid equation")
             props.setInput("")
         }else{
-            //first if here should be factorial, if factorial is at ind 0 and no 'badvals' and no - sign in middle
-            //.. then it's a simple factorial submission. 
             if(equation.indexOf("!") != -1){
                 let pInd = equation.indexOf("!")
                 secondVal = equation.substring(0,pInd)
@@ -85,16 +89,19 @@ export default function CalcBoard(props){
                 setResultGot(true)
             }
         }
+        ans = false
     }
     return(
         <div className="calc-board">
             <input type={"text"} className="val-input" value={props.input}></input>
             <div className="numpad">
             {   
-                props.digits.map(button=><Button key = {button.id} digit = {button.digit} input={props.input} setInput={props.setInput} resultGot={resultGot} setResultGot={setResultGot}/>)
-            }   
-             <button onClick={backButton} className="dig-btn">⌫</button>
-             <button onClick={callEnter} className="dig-btn">↩</button>
+                props.digits.map(button=><Button key = {button.id} digit = {button.digit} input={props.input} setInput={props.setInput} resultGot={resultGot} setResultGot={setResultGot} prevResult = {props.prevResult} setPrevResult={props.setPrevResult}/>)
+            }
+             <button onClick={ansButton} className="ans-btn">ᴀɴs</button>   
+             <button onClick={backButton} className="ans-btn">⌫</button>
+             <button onClick={callEnter} className="ans-btn">↩</button>
+
             </div>
            
         </div>

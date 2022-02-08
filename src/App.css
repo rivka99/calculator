@@ -47,25 +47,38 @@ body{
   background-color: darkgray;
   border-radius: 8px;
   border: 2px solid black;
-  width: 145px;
+  width: 160px;
   margin-top: 40px;
   margin-left: 60px;
   padding: 8px;
+  align-items: center;
+  justify-content: center;
 }
 .numpad{
   display: flex;
   flex-direction:row;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 .val-input{
-  width: 138px;
+  width: 153px;
   font-size: larger;
   margin-bottom: 5px;
 }
 .dig-btn{
   font-size: larger;
-  width: auto;
-  min-width: 30px;
+  width: 32px;
+  margin: 4px;
+  height: 32px;
+}
+.ans-btn{
+  text-align: center;
+  padding: 0;
+  font-size: larger;
+  width: 32px;
+  height: 32px;
+  font-size: small;
   margin: 3px;
 }
 h2{
