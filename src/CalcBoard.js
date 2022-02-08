@@ -63,7 +63,8 @@ export default function CalcBoard(props){
                 firstVal = equation.substring(0,pInd)
                 secondVal = equation.substring(pInd+1,equation.length)
                 result = parseFloat(firstVal)*parseFloat(secondVal) 
-                props.setInput(result)
+                let fixResult = +result.toFixed(4);
+                props.setInput(fixResult)
                 setResultGot(true)
             }
             else if(equation.indexOf("÷") != -1){
