@@ -13,7 +13,7 @@ function App() {
   const [prevResult, setPrevResult] = useState("")
   return (
   <div>
-    <h2>React Calculator</h2>
+    <h1>React Calculator</h1>
     <CalcBoard digits={digits} input={input} setInput={setInput} prevResult={prevResult} setPrevResult={setPrevResult}/>
     </div>
   );

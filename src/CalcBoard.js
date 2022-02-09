@@ -66,7 +66,7 @@ export default function CalcBoard(props){
                 props.setInput(result)
                 props.setPrevResult(result)
                 setResultGot(true)
-            }else if(equation.indexOf("-") != -1 ){
+            }else if((equation.indexOf("-") != -1 && equation.indexOf("-") != 0) || (equation.indexOf("-")=== 0 &&equation.indexOf("-",1) != -1 )){
                 let pInd
                 if(equation.includes("ᴀɴs")){
                     equation =  equation.replace(/ᴀɴs/gi, String(props.prevResult))
@@ -121,8 +121,10 @@ export default function CalcBoard(props){
                 firstVal = equation.substring(0,pInd)
                 secondVal = equation.substring(pInd+1,equation.length)
                 result = Math.pow(parseFloat(firstVal),parseFloat(secondVal))
-                let fixResult = +result.toFixed(4);
-                props.setInput(fixResult)
+                if(result > 1000000000){
+                    result = result.toExponential(4);
+                } 
+                props.setInput(result)
                 props.setPrevResult(result)
                 setResultGot(true)
             }
