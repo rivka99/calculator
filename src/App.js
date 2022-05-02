@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import CalcBoard from './CalcBoard';
+import SolveForPrize from './SolveForPrizes';
 import './App.css';
 import { useState } from 'react';
 import { HashRouter, HashRouter as Router, Route, Routes } from 'react-router-dom'
@@ -15,6 +16,7 @@ function App() {
   <div>
     <h1>React Calculator</h1>
     <CalcBoard digits={digits} input={input} setInput={setInput} prevResult={prevResult} setPrevResult={setPrevResult}/>
+    <SolveForPrize/>
     </div>
   );
 }

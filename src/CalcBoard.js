@@ -15,7 +15,8 @@ export default function CalcBoard(props){
     }
 
     function callEnter(){
-        enterButton(props.input)
+        //this function could split up the props.input based on operations and () and make calls to 'solver'
+        solver(props.input)
     }
     function ansButton(){
         ans = true
@@ -26,7 +27,7 @@ export default function CalcBoard(props){
             props.setInput(props.input + "ᴀɴs")
         }
     }
-    function enterButton(equation){
+    function solver(equation){
         // then add a function to look at the input (with parantesis included, split function into each basic equation
         //(5*4)+((2-4)*(12/3)) should call this function once for the first value, 3 times for the second value (original 2, plus 
         //evaluation of those 2, and finally another time to evaluate both)
